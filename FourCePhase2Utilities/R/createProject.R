@@ -71,7 +71,7 @@ createProject <- function (projectName, workingDirectory="/RDevelopment") {
             "```\n",
             "devtools::install_github(\"https://github.com/covidclinical/", 
                 rPackageRespositoryName, 
-                ", subdir=\"", 
+                "\", subdir=\"", 
                 "FourCePhase2",
                 projectName,
                 "\", upgrade=FALSE)\n",
