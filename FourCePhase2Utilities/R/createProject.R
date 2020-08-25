@@ -294,6 +294,14 @@ createGitHubRepositoryAndPush <- function(repositoryName, repositoryPath) {
     ## prompt for github username
     username = readline("GitHub username: ")
 
+    rs_path <- Sys.getenv('RS_RPOSTBACK_PATH')
+    git_askpass <- Sys.getenv('GIT_ASKPASS')
+    if(nchar(rs_path) && !nchar(Sys.which(git_askpass))){
+        PATH <- Sys.getenv("PATH")
+        rs_path <- unique(c(rs_path, sub("rpostback", 'postback', rs_path)))
+        Sys.setenv(PATH = paste(c(PATH, rs_path), collapse = .Platform$path.sep))
+    }
+
     ## use GitHub API to create the remote
     system(
         paste(
