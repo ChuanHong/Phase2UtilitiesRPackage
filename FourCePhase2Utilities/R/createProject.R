@@ -150,8 +150,10 @@ emit4CeFunctionStubToFile <- function (projectName, functionName, commentPreambl
 #'
 #' @param projectName The name of the project.
 #' @param workingDirectory The directory in which the code stubs will be written.
+#' @param siteDataRepositoryName The name of the repository for the site data for this project.
+#' @param countryDataRepositoryName The name of the repository for the country data for this project.
 
-createPhase2Stubs <- function (projectName, workingDirectory) {
+createPhase2Stubs <- function (projectName, workingDirectory, siteDataRepositoryName, countryDataRepositoryName) {
 
     ## runAnalysis()
     emit4CeFunctionStubToFile(
@@ -179,6 +181,33 @@ createPhase2Stubs <- function (projectName, workingDirectory) {
         workingDirectory=workingDirectory, 
         commentPreamble="Submits the results of the analytic workflow",
         functionBody="\t#TODO: implement data submission"
+    )
+
+    ## submitAnalysis()
+    emit4CeFunctionStubToFile(
+        projectName=projectName, 
+        functionName="submitAnalysis",
+        workingDirectory=workingDirectory, 
+        commentPreamble="Submits the results of the analytic workflow",
+        functionBody="\t#TODO: implement data submission"
+    )
+
+    ## getSiteDataRepositoryUrl()
+    emit4CeFunctionStubToFile(
+        projectName=projectName, 
+        functionName="getSiteDataRepositoryUrl",
+        workingDirectory=workingDirectory, 
+        commentPreamble="Returns the GitHub URL of the Site Data Repository for this project",
+        functionBody=paste(sep="", "\treturn(\"https://github.com/covidclinical/", siteDataRepositoryName, ".git\"")
+    )
+
+    ## getSiteDataRepositoryUrl()
+    emit4CeFunctionStubToFile(
+        projectName=projectName, 
+        functionName="getAggregateCountryDataRepositoryUrl",
+        workingDirectory=workingDirectory, 
+        commentPreamble="Returns the GitHub URL of the Site Data Repository for this project",
+        functionBody=paste(sep="", "\treturn(\"https://github.com/covidclinical/", countryDataRepositoryName, ".git\"")
     )
 }
 
@@ -224,6 +253,36 @@ doInitializeAddCommit <- function(repositoryPath) {
         paste(sep="", "git add . ", repositoryPath, "; git -c user.email=\"4CE@i2b2transmart.org\" -c user.name=\"4CE Consortium\" commit -m \"auto generated initial commit\"")
     )
 
+    ## return to the directory we were in when we started
+    setwd(originalDirectory)
+}
+
+createGitHubRepositoryAndPush <- function(repositoryName, repositoryPath) {
+
+    ## prompt for github username
+    username = readline("GitHub username: ")
+
+    ## use GitHub API to create the remote
+    system(
+        paste(
+            sep="",
+            "curl -u '", username, "' https://api.github.com/orgs/covidclinical/repos -d '{\"name\":\"", repositoryName, "\"}'"
+        )
+    )
+
+    ## add the remote
+    originalDirectory = getwd()
+    setwd(repositoryPath)
+    system(
+        paste(
+            sep="",
+            "git remote add origin https://github.com/covidclinical/", repositoryName, ".git", 
+        )
+    )
+
+    ## push
+    system("git push -u origin master")
+    
     ## return to the directory we were in when we started
     setwd(originalDirectory)
 }
