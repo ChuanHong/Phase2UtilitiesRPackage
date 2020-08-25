@@ -68,7 +68,7 @@ createProject <- function (projectName, workingDirectory="/RDevelopment") {
             sep="", 
             "R code to run, validate, and submit the analysis for the ", projectName, " project.\n",
             "To install this package in R:\n",
-            "devtools::install_github(\"https://github.com/covidclinical/", 
+            "    devtools::install_github(\"https://github.com/covidclinical/", 
                 rPackageRespositoryName, 
                 ", subdir=\"", 
                 "FourCePhase2",
