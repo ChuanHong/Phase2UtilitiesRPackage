@@ -67,13 +67,15 @@ createProject <- function (projectName, workingDirectory="/RDevelopment") {
         message = paste(
             sep="", 
             "R code to run, validate, and submit the analysis for the ", projectName, " project.\n",
-            "To install this package in R:\n",
-            "    devtools::install_github(\"https://github.com/covidclinical/", 
+            "To install this package in R:\n\n",
+            "```\n",
+            "devtools::install_github(\"https://github.com/covidclinical/", 
                 rPackageRespositoryName, 
                 ", subdir=\"", 
                 "FourCePhase2",
                 projectName,
-                "\", upgrade=FALSE)")
+                "\", upgrade=FALSE)\n",
+            "```\n")
     )
 
     writeReadmeMd(
