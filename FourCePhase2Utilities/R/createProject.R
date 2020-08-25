@@ -104,7 +104,7 @@ createProject <- function (projectName, workingDirectory="/RDevelopment") {
     doInitializeAddCommit(countryDataRepositoryPath)
 
     ## create GitHub repositories and push
-    createGitHubRepositoryAndPush(rPackageRespositoryName, rPackageRespositoryPath)
+    createGitHubRepositoryAndPush(rPackageRespositoryName, rPackageParentRepositoryPath)
     createGitHubRepositoryAndPush(siteDataRepositoryName, siteDataRepositoryPath)
     createGitHubRepositoryAndPush(countryDataRepositoryName, countryDataRepositoryPath)
 }
