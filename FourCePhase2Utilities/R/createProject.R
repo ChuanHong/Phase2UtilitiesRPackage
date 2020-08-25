@@ -66,7 +66,7 @@ createProject <- function (projectName, workingDirectory="/RDevelopment") {
         workingDirectory = rPackageParentRepositoryPath, 
         message = paste(
             sep="", 
-            "R code to run, validate, and submit the analysis for the ", projectName, " project.\n",
+            "R code to run, validate, and submit the analysis for the ", projectName, " project.\n\n",
             "To install this package in R:\n\n",
             "```\n",
             "devtools::install_github(\"https://github.com/covidclinical/", 
