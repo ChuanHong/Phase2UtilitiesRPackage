@@ -54,15 +54,15 @@ createProject <- function (projectName, workingDirectory="/RDevelopment") {
         )
 
     if (dir.exists(rPackageParentRepositoryPath)) {
-        stop(rPackageParentRepositoryPath, "already exists!")
+        stop(rPackageParentRepositoryPath, " already exists!")
     }   
     
     if (dir.exists(siteDataRepositoryPath)) {
-        stop(siteDataRepositoryPath, "already exists!")
+        stop(siteDataRepositoryPath, " already exists!")
     }
     
     if (dir.exists(countryDataRepositoryPath)) {
-        stop(countryDataRepositoryPath, "already exists!")
+        stop(countryDataRepositoryPath, " already exists!")
     }
 
     ## create the directories for the repositories
