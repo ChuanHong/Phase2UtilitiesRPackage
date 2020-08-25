@@ -199,6 +199,12 @@ writeReadmeMd <- function(projectName, workingDirectory, message="") {
     )
 }
 
+
+#' Given a path to a directory, this function initialzies a new Git repository there,
+#' then adds all of the current contents and does an initial commit.
+#'
+#' @param repositoryPath The path to the directory that will become the git repository
+
 doInitializeAddCommit <- function(repositoryPath) {
     
     ## init the repository
