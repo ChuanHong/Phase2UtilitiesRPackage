@@ -1,4 +1,6 @@
-#' Creates repository infrastructure for a 4CE Phase 2 Project 
+#' Creates repository infrastructure for a 4CE Phase 2 Project.  Creates local repositories,
+#' prompts for a GitHub username, and tries to create the corresponding GitHub repositories
+#' and push inital contents.
 #'
 #' @param projectName The name of the project.  Will be used to create correlated repository names.
 #' @param workingDirectory The directory in which the project repositories will be created.
@@ -100,6 +102,11 @@ createProject <- function (projectName, workingDirectory="/RDevelopment") {
     doInitializeAddCommit(rPackageParentRepositoryPath)
     doInitializeAddCommit(siteDataRepositoryPath)
     doInitializeAddCommit(countryDataRepositoryPath)
+
+    ## create GitHub repositories and push
+    createGitHubRepositoryAndPush(rPackageRespositoryName, rPackageRespositoryPath)
+    createGitHubRepositoryAndPush(siteDataRepositoryName, siteDataRepositoryPath)
+    createGitHubRepositoryAndPush(countryDataRepositoryName, countryDataRepositoryPath)
 }
 
 #' Returns the text of the empty R function call stub for the project 
