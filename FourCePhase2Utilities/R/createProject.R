@@ -227,5 +227,3 @@ doInitializeAddCommit <- function(repositoryPath) {
     ## return to the directory we were in when we started
     setwd(originalDirectory)
 }
-
-createProject("NathanTest")
