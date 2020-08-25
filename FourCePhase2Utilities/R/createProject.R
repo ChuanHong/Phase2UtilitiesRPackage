@@ -1,0 +1,225 @@
+#' Creates repository infrastructure for a 4CE Phase 2 Project 
+#'
+#' @param projectName The name of the project.  Will be used to create correlated repository names.
+#' @param workingDirectory The directory in which the project repositories will be created.
+#' 
+#' @keywords 4CE Phase2 Project
+#' @export
+
+createProject <- function (projectName, workingDirectory="/RDevelopment") {
+
+    ## names for the directories to be created
+    rPackageRespositoryName = paste(
+        sep = "", 
+        "Phase2",
+        projectName,
+        "RPackage"
+    )
+
+    siteDataRepositoryName = paste(
+        sep = "", 
+        "Phase2",
+        projectName,
+        "DataPerSite"
+    )
+
+    countryDataRepositoryName = paste(
+        sep = "", 
+        "Phase2",
+        projectName,
+        "AggregateDataPerCountry"
+    )
+
+    ## R package repository
+    rPackageParentRepositoryPath = 
+        file.path(
+            workingDirectory, 
+            rPackageRespositoryName
+        )
+
+    ## site data repository
+    siteDataRepositoryPath = 
+        file.path(
+            workingDirectory, 
+            siteDataRepositoryName
+        )
+
+    ## country data repository
+    countryDataRepositoryPath = 
+        file.path(
+            workingDirectory, 
+            countryDataRepositoryName
+        )
+
+    ## create the directories for the repositories
+    dir.create(rPackageParentRepositoryPath)
+    dir.create(siteDataRepositoryPath)
+    dir.create(countryDataRepositoryPath)
+
+    ## add READMEs
+    writeReadmeMd(
+        projectName = rPackageRespositoryName, 
+        workingDirectory = rPackageParentRepositoryPath, 
+        message = paste(sep="", "R code to run, validate, and submit the analysis for the ", projectName, " project.")
+    )
+
+    writeReadmeMd(
+        projectName = siteDataRepositoryName, 
+        workingDirectory = siteDataRepositoryPath, 
+        message = paste(sep="", "Site data repository for the ", projectName, " project.")
+    )
+
+    writeReadmeMd(
+        projectName = countryDataRepositoryName, 
+        workingDirectory = countryDataRepositoryPath, 
+        message = paste(sep="", "Country data repository for the ", projectName, " project.")
+    )
+
+    ## directory in which the R package will be built under the Git repository
+    rPackagePath = file.path(
+        rPackageParentRepositoryPath,
+        paste(
+            sep = "",
+            "FourCe", 
+            "Phase2",
+            projectName
+        )
+    )
+
+    ## create the R package inside of that directory
+    usethis::create_package(
+        path = rPackagePath
+    )
+
+    ## create the three required stubs for the R package
+    createPhase2Stubs(projectName, rPackagePath)
+
+    ## initialize git repositories
+    doInitializeAddCommit(rPackageParentRepositoryPath)
+    doInitializeAddCommit(siteDataRepositoryPath)
+    doInitializeAddCommit(countryDataRepositoryPath)
+}
+
+#' Returns the text of the empty R function call stub for the project 
+#'
+#' @param projectName The name of the project.
+#' @param functionName The name of the function to be emitted.
+#' @param commentPreamble The preamble of the comments to be emitted.
+#' @param functionBody Any text to be included in the function body.
+
+emit4CeFunctionStub <- function (projectName, functionName, commentPreamble, functionBody="") {
+    return(
+        paste(
+            sep="",
+            "
+#' ", commentPreamble, " for the ", projectName, " project
+#'
+#' @keywords 4CE Phase2 Project
+#' @export
+
+", functionName ," <- function() {
+", functionBody, "
+}
+"
+        )
+    )
+}
+
+#' Writes the result of calling emit4CeFunctionStub to a file named functionName.R
+#'
+#' @param projectName The name of the project.
+#' @param functionName The name of the function to be emitted.
+#' @param commentPreamble The preamble of the comments to be emitted.
+#' @param workingDirectory The working directory into which the file will be written
+#' @param functionBody Any text to be included in the function body.
+
+emit4CeFunctionStubToFile <- function (projectName, functionName, commentPreamble, workingDirectory, functionBody="") {
+
+    writeLines(
+        emit4CeFunctionStub(
+            projectName=projectName, 
+            functionName=functionName, 
+            commentPreamble=commentPreamble,
+            functionBody=functionBody
+        ), 
+        con=file.path(workingDirectory, "R", paste(sep="", functionName, ".R"))
+    )
+}
+
+#' Creates R function stubs for a 4CE Phase 2 Project 
+#'
+#' @param projectName The name of the project.
+#' @param workingDirectory The directory in which the code stubs will be written.
+
+createPhase2Stubs <- function (projectName, workingDirectory) {
+
+    ## runAnalysis()
+    emit4CeFunctionStubToFile(
+        projectName=projectName, 
+        functionName="runAnalysis", 
+        workingDirectory=workingDirectory,
+        commentPreamble="Runs the analytic workflow",
+        functionBody="\t#TODO: implement analysis"
+    )
+
+    ## validateAnalysis()
+    emit4CeFunctionStubToFile(
+        projectName=projectName, 
+        functionName="validateAnalysis", 
+        workingDirectory=workingDirectory,
+        commentPreamble="Validates the results of the analytic workflow",
+        functionBody="\t#TODO: implement validation"
+    )
+
+    ## TODO: add code to push result files to github; may require too much bookkeeping w.r.t. generated files
+    ## submitAnalysis()
+    emit4CeFunctionStubToFile(
+        projectName=projectName, 
+        functionName="submitAnalysis",
+        workingDirectory=workingDirectory, 
+        commentPreamble="Submits the results of the analytic workflow",
+        functionBody="\t#TODO: implement data submission"
+    )
+}
+
+#' Writes a placeholder README.md for a git repository
+#'
+#' @param projectName The name of the git repository
+#' @param workingDirectory The directory in which the README.md will be written.
+
+writeReadmeMd <- function(projectName, workingDirectory, message="") {
+
+    writeLines(
+        con=file.path(workingDirectory, "README.md"),
+        paste(sep="",
+"# ", projectName, "
+", message, "
+"
+        )
+    )
+}
+
+doInitializeAddCommit <- function(repositoryPath) {
+    
+    ## init the repository
+    system(
+        paste(
+            sep = "",
+            "git init ", repositoryPath
+        )
+    )
+
+    ## save current directory and change to the specified working directory
+    originalDirectory = getwd()
+    setwd(repositoryPath)
+
+    ## add the current directory contents and run an initial commit
+    system(
+        paste(sep="", "git add . ", repositoryPath, "; git -c user.email=\"4CE@i2b2transmart.org\" -c user.name=\"4CE Consortium\" commit -m \"auto generated initial commit\"")
+    )
+
+    ## return to the directory we were in when we started
+    setwd(originalDirectory)
+}
+
+createProject("NathanTest")
