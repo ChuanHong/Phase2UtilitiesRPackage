@@ -285,7 +285,7 @@ createGitHubRepositoryAndPush <- function(repositoryName, repositoryPath) {
     system(
         paste(
             sep="",
-            "git remote add origin https://github.com/covidclinical/", repositoryName, ".git", 
+            "git remote add origin https://github.com/covidclinical/", repositoryName, ".git"
         )
     )
 
