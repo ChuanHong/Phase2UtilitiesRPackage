@@ -107,6 +107,8 @@ createProject <- function (projectName, workingDirectory="/RDevelopment") {
     ## create the three required stubs for the R package
     createPhase2Stubs(projectName, rPackagePath, siteDataRepositoryName, countryDataRepositoryName)
 
+    writeLines("You will be prompted for your GitHub username and password a total of 6 times.\n")
+
     ## initialize git repositories
     doInitializeAddCommit(rPackageParentRepositoryPath)
     doInitializeAddCommit(siteDataRepositoryPath)
