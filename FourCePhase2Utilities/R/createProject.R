@@ -200,7 +200,7 @@ createPhase2Stubs <- function (projectName, workingDirectory, siteDataRepository
         functionName="getSiteDataRepositoryUrl",
         workingDirectory=workingDirectory, 
         commentPreamble="Returns the GitHub URL of the Site Data Repository for this project",
-        functionBody=paste(sep="", "\treturn(\"https://github.com/covidclinical/", siteDataRepositoryName, ".git\"")
+        functionBody=paste(sep="", "\treturn(\"https://github.com/covidclinical/", siteDataRepositoryName, ".git\")")
     )
 
     ## getSiteDataRepositoryUrl()
@@ -209,7 +209,7 @@ createPhase2Stubs <- function (projectName, workingDirectory, siteDataRepository
         functionName="getAggregateCountryDataRepositoryUrl",
         workingDirectory=workingDirectory, 
         commentPreamble="Returns the GitHub URL of the Site Data Repository for this project",
-        functionBody=paste(sep="", "\treturn(\"https://github.com/covidclinical/", countryDataRepositoryName, ".git\"")
+        functionBody=paste(sep="", "\treturn(\"https://github.com/covidclinical/", countryDataRepositoryName, ".git\")")
     )
 }
 
