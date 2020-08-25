@@ -8,6 +8,8 @@
 
 createProject <- function (projectName, workingDirectory="/RDevelopment") {
 
+    ## TODO: add some checks to make sure the repos don't already exist
+
     ## names for the directories to be created
     rPackageRespositoryName = paste(
         sep = "", 
@@ -92,7 +94,7 @@ createProject <- function (projectName, workingDirectory="/RDevelopment") {
     )
 
     ## create the three required stubs for the R package
-    createPhase2Stubs(projectName, rPackagePath)
+    createPhase2Stubs(projectName, rPackagePath, siteDataRepositoryName, countryDataRepositoryName)
 
     ## initialize git repositories
     doInitializeAddCommit(rPackageParentRepositoryPath)
