@@ -10,8 +10,6 @@
 
 createProject <- function (projectName, workingDirectory="/RDevelopment") {
 
-    ## TODO: add some checks to make sure the repos don't already exist
-
     ## names for the directories to be created
     rPackageRespositoryName = paste(
         sep = "", 
@@ -54,6 +52,18 @@ createProject <- function (projectName, workingDirectory="/RDevelopment") {
             workingDirectory, 
             countryDataRepositoryName
         )
+
+    if (dir.exists(rPackageParentRepositoryPath)) {
+        stop(rPackageParentRepositoryPath, "already exists!")
+    }   
+    
+    if (dir.exists(siteDataRepositoryPath)) {
+        stop(siteDataRepositoryPath, "already exists!")
+    }
+    
+    if (dir.exists(countryDataRepositoryPath)) {
+        stop(countryDataRepositoryPath, "already exists!")
+    }
 
     ## create the directories for the repositories
     dir.create(rPackageParentRepositoryPath)
