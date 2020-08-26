@@ -26,7 +26,7 @@ and two will be used to store and organize the results from the analyses.  The r
 The R library (`FourCePhase2Utilities`) in this repository contains functions that can automatically create these repositories (both local copies and on GitHub) and pre-populate them with several useful files.  This library has been tested in the 4CE Docker container.  It may run in other R environments, 
 exercise left to reader.
 
-To get started, run the docker container, making the parent directory of where you want to create the R 
+To get started, run the Docker container, making the parent directory of where you want to create the R 
 package on the host available at `/RDevelopment` in the container.
 
 Here I am just using `/tmp`, you will likely want to use something else:
@@ -46,6 +46,12 @@ Connect to the container via ssh and run R, e.g.:
 ```shell
 ssh localhost -p 2200
 R
+```
+
+The latest versions of the 4CE Docker container come pre-configured with this R library installed. To ensure that you have the latest version of this software, however, you should run the following in your R session before proceeding:
+
+``` R
+devtools::install_github("https://github.com/covidclinical/Phase2UtilitiesRPackage", subdir="FourCePhase2Utilities", upgrade=FALSE)
 ```
 
 In order to perform the following steps you **must** have been granted permission to create repositories under the [covidclinical Git organization](https://github.com/covidclinical).  Only members of the 4CE consortium will be granted this permission, and they should request it through the [phase-2 4CE slack channel](https://covidclinical.slack.com/archives/C012UTRHJCR).
