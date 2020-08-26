@@ -44,7 +44,7 @@ docker run --rm --name 4ce -d -v /tmp:/RDevelopment \
 Connect to the container via ssh and run R, e.g.:
 
 ```shell
-ssh localhost -p 2200
+ssh testuser@localhost -p 2200
 R
 ```
 
