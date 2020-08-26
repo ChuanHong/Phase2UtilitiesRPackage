@@ -97,7 +97,7 @@ in the host environment, you would need to adjust file locations appropriately.
 You should consider a more nuanced approach to source control, but to complete the example without 
 additional complexity, we will assume that you are staging, committing, and pushing all of your 
 code at once.
-E.g., from the command line in the container, we would:
+E.g., from the Linux command line in the container, we would:
 
 Add your changes to staging:
 
