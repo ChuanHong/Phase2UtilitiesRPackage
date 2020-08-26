@@ -35,8 +35,8 @@ Here I am just using `/tmp`, you will likely want to use something else:
 docker run --rm --name 4ce -d -v /tmp:/RDevelopment \
                             -p 8787:8787 \
                             -p 2200:22 \
-                            -e CONTAINER_USER_USERNAME=palmer \
-                            -e CONTAINER_USER_PASSWORD=palmer \
+                            -e CONTAINER_USER_USERNAME=testuser \
+                            -e CONTAINER_USER_PASSWORD=testpassword \
                             dbmi/4ce-analysis:latest
 ```
 
