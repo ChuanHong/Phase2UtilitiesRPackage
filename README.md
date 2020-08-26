@@ -48,7 +48,7 @@ ssh localhost -p 2200
 R
 ```
 
-In order to perform the following steps you **must** have been granted permission to create repositories under the [covidclinical](https://github.com/covidclinical).  Only members of the 4CE consortium will be granted this permission, and they should request it through the [phase-2 4CE slack channel](https://covidclinical.slack.com/archives/C012UTRHJCR).
+In order to perform the following steps you **must** have been granted permission to create repositories under the [covidclinical Git organization](https://github.com/covidclinical).  Only members of the 4CE consortium will be granted this permission, and they should request it through the [phase-2 4CE slack channel](https://covidclinical.slack.com/archives/C012UTRHJCR).
 
 In the rest of this example, we will create a new project called "MyAnalysis". This example is for illustrative purposes only.
 You should replace "MyAnalysis" with the name of the project that you are creating.
