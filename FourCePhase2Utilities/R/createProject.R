@@ -289,6 +289,14 @@ doInitializeAddCommit <- function(repositoryPath) {
     setwd(originalDirectory)
 }
 
+#' Given a path to a directory that contians a local Git repository,
+#' this function uses the GitHub web API to create a new repository under
+#' the covidclinical organization, adds it as a remote to the local repository,
+#' and pushes to the new GitHub remote.
+#'
+#' @param repositoryName The name of the repository
+#' @param repositoryPath The path to the directory that contains the local git repository
+
 createGitHubRepositoryAndPush <- function(repositoryName, repositoryPath) {
 
     ## prompt for github username
