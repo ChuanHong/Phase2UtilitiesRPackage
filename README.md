@@ -16,9 +16,9 @@ and two will be used to store and organize the results from the analyses.  The r
 
 `Phase2[PROJECT_NAME]RPackage`: the repository that will contain the R code to run the project's analytics
 
-`Phase2[PROJECT_NAME]DataPerSite`: the repository where site-level data will be submitted 
+`Phase2[PROJECT_NAME]ResultsPerSite`: the repository where site-level data will be submitted 
 
-`Phase2[PROJECT_NAME]AggregateDataPerCountry`: the repository where country-level data will be stored
+`Phase2[PROJECT_NAME]AggregateResultsPerCountry`: the repository where country-level data will be stored
 
 
 ## Automated Project Creation

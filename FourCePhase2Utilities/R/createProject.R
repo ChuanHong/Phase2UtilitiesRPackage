@@ -22,14 +22,14 @@ createProject <- function (projectName, workingDirectory="/RDevelopment") {
         sep = "", 
         "Phase2",
         projectName,
-        "DataPerSite"
+        "ResultsPerSite"
     )
 
     countryDataRepositoryName = paste(
         sep = "", 
         "Phase2",
         projectName,
-        "AggregateDataPerCountry"
+        "AggregateResultsPerCountry"
     )
 
     ## R package repository
